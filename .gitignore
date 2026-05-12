@@ -1,0 +1,54 @@
+# IDE and editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local data/runtime outputs
+logs/
+*.log
+tmp/
+temp/
+
+# Archive files
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PowerPoint/Office temporary files
+~$*
