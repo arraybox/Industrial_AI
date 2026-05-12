@@ -1,6 +1,6 @@
 # PJT_21-108
 
-OpenCV의 기하학적 영상 변환과 프레임 간 특징점 추적을 실습하는 폴더입니다. Affine/Perspective Transform을 이용한 이미지 워핑 예제와 Lucas-Kanade Optical Flow 기반 keypoint tracking 예제가 포함되어 있습니다.
+OpenCV의 기하학적 영상 변환, 프레임 간 특징점 추적, 파노라마 생성을 실습하는 폴더입니다. Affine/Perspective Transform을 이용한 이미지 워핑, Lucas-Kanade Optical Flow 기반 keypoint tracking, 여러 장의 이미지를 이어 붙이는 panorama stitching 예제가 포함되어 있습니다.
 
 ## 파일 구성
 
@@ -8,8 +8,10 @@ OpenCV의 기하학적 영상 변환과 프레임 간 특징점 추적을 실습
 |---|---|
 | `example1.py` | 마우스로 선택한 점을 기준으로 affine transform, inverse affine transform, rotation, perspective transform을 수행 |
 | `example2.py` | `traffic.mp4` 영상에서 Lucas-Kanade 알고리즘으로 프레임 간 특징점을 추적 |
+| `example3.py` | `PJT_21-108` 폴더 바로 아래의 여러 이미지를 OpenCV Stitcher로 이어 붙여 파노라마 이미지 생성 |
 | `circlesgrid.png` | `example1.py`에서 사용하는 워핑 실습용 이미지 |
 | `traffic.mp4` | `example2.py`에서 사용하는 교통 영상 |
+| `0.jpg`, `1.jpg` | `example3.py`에서 사용하는 파노라마 입력 이미지. 최소 2장 필요 |
 
 ## `example1.py` 주요 내용
 
@@ -47,14 +49,41 @@ OpenCV의 기하학적 영상 변환과 프레임 간 특징점 추적을 실습
    - `ESC`: 종료
    - `c`: 추적점을 초기화하고 다시 검출
 
+## `example3.py` 주요 내용
+
+1. 이미지 입력
+   - `PJT_21-108` 폴더 바로 아래에서 `.jpg`, `.jpeg`, `.png` 파일을 읽습니다.
+   - 파일명 정렬 순서대로 이미지를 stitcher에 전달합니다.
+
+2. Panorama Stitching
+   - `cv2.Stitcher_create()`를 우선 사용합니다.
+   - 구버전 OpenCV에서는 `cv2.createStitcher()`로 fallback합니다.
+   - `stitcher.stitch(images)` 결과가 `cv2.Stitcher_OK`이면 파노라마를 표시합니다.
+   - OpenCV Stitcher가 실패하면 SIFT/ORB 특징점 매칭과 Homography 기반 수동 stitching을 시도합니다.
+
+3. 결과 표시
+   - 생성된 파노라마 이미지를 `panorama_result.jpg`로 저장합니다.
+   - 저장 후 20% 크기로 축소해 `panorama` 창에 출력합니다.
+   - 실패하면 OpenCV stitcher 상태 코드를 출력합니다.
+
 ## 실행 방법
 
 ```bash
 python example1.py
 python example2.py
+python example3.py
 ```
 
-필요 라이브러리는 `opencv-python`, `numpy`입니다. 두 예제 모두 OpenCV 창을 사용하므로 GUI가 가능한 환경에서 실행해야 합니다.
+`example3.py`를 실행하려면 다음과 같은 구조로 파노라마 입력 이미지를 준비합니다.
+
+```text
+PJT_21-108/
+├── 0.jpg
+├── 1.jpg
+└── example3.py
+```
+
+필요 라이브러리는 `opencv-python`, `numpy`입니다. 세 예제 모두 OpenCV 창을 사용하므로 GUI가 가능한 환경에서 실행해야 합니다.
 
 ## 작성자 정보
 

@@ -45,7 +45,7 @@
 | `PJT_21-105` | Contour, Connected Component, Distance Transform |
 | `PJT_21-106` | K-means, Watershed, GrabCut 기반 세그멘테이션 |
 | `PJT_21-107` | Harris, FAST, GFTT, SIFT 특징 검출 |
-| `PJT_21-108` | Affine/Perspective Transform 이미지 워핑과 Lucas-Kanade 특징점 추적 |
+| `PJT_21-108` | Affine/Perspective Transform 이미지 워핑, Lucas-Kanade 특징점 추적, 파노라마 생성 |
 | `image_labeling_tool` | 웹 기반 이미지 알파벳 라벨링 도구 |
 | `CBLand` | 충청북도 토지 이용, 인구, 인프라 상관분석 프로젝트 |
 
@@ -55,6 +55,7 @@
 |---|---|---|
 | `PJT_21-108` | `example1.py`, `circlesgrid.png` | 선택점 기반 affine/perspective image warping 실습 |
 | `PJT_21-108` | `example2.py`, `traffic.mp4` | Lucas-Kanade Optical Flow 기반 프레임 간 keypoint tracking 실습 |
+| `PJT_21-108` | `example3.py`, `0.jpg`, `1.jpg` | OpenCV Stitcher와 특징점 매칭 fallback 기반 panorama stitching 실습 |
 
 ## 실행 환경
 

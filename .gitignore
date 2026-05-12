@@ -38,6 +38,7 @@ logs/
 *.log
 tmp/
 temp/
+panorama_result.jpg
 
 # Archive files
 *.zip
