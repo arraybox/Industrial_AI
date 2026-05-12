@@ -1,59 +1,57 @@
-# Chapter 7 - 특징 검출 (Feature Detection)
+﻿# PJT_21-107
+
+특징 검출(Feature Detection)을 학습하는 OpenCV 실습 폴더입니다. Harris Corner, FAST, Good Features To Track, SIFT를 사용해 이미지의 코너와 특징점을 검출하고, 원본 이미지와 회전 이미지에서 특징점 수와 위치를 비교합니다.
 
 ## 파일 구성
 
 | 파일 | 설명 |
-|------|------|
-| `example.py` | Harris Corner, FAST 코너 검출 예제 |
-| `example2.py` | FAST 키포인트 시각화 및 drawMatches 예제 |
-| `chapter7.py` | FAST, Harris, GFTT, SIFT 4가지 특징 검출 비교 |
+|---|---|
+| `example.py` | Harris Corner와 FAST 코너 검출 기본 예제 |
+| `example2.py` | FAST keypoint를 `drawKeypoints`, `drawMatches`로 시각화하는 예제 |
+| `example3.py` | SIFT 특징점을 Lena 원본/회전 이미지에서 검출해 비교 |
+| `chapter7.py` | FAST, Harris, GFTT, SIFT 4가지 특징 검출기를 한 번에 비교 |
+| `scenetext01.jpg` | `example.py`, `example2.py` 입력 이미지 |
+| `Lena.png` | `chapter7.py`, `example3.py` 입력 이미지 |
+| `Lena_rotated.png` | 회전 비교용 입력 이미지 |
+| `Lena_rotate.png` | 회전 이미지 관련 파일 |
 
-## 이미지 파일
+## `chapter7.py` 주요 내용
 
-| 파일 | 설명 |
-|------|------|
-| `scenetext01.jpg` | example, example2에서 사용하는 입력 영상 |
-| `Lena.png` | chapter7에서 사용하는 영상(1) |
-| `Lena_rotate.png` | Lena.png를 270도 회전한 영상(2) |
+1. FAST
+   - `cv2.FastFeatureDetector_create()`로 빠른 코너 검출을 수행합니다.
+   - threshold와 nonmax suppression 설정에 따라 검출량이 달라집니다.
+
+2. Harris Corner
+   - `cv2.cornerHarris()` 결과에서 threshold 이상인 지점을 코너로 표시합니다.
+
+3. Good Features To Track
+   - `cv2.goodFeaturesToTrack()`으로 추적에 적합한 코너 후보를 찾습니다.
+
+4. SIFT
+   - `cv2.SIFT_create()`로 scale/rotation 변화에 비교적 강한 특징점을 검출합니다.
+
+5. 원본/회전 이미지 비교
+   - `detect_all_features()`에서 네 종류의 특징점을 검출합니다.
+   - `draw_all_features()`로 결과를 한 이미지에 표시합니다.
+   - `count_features()`로 검출된 특징점 개수를 출력합니다.
 
 ## 실행 방법
 
 ```bash
-cd src/chapter7
 python example.py
 python example2.py
+python example3.py
 python chapter7.py
 ```
 
-## 각 파일 상세 설명
+필요 라이브러리는 `opencv-python`, `numpy`입니다. SIFT는 OpenCV 버전에 따라 `opencv-contrib-python`이 필요할 수 있습니다.
+## 작성자 정보
 
-### example.py
+| 항목 | 내용 |
+|---|---|
+| 작성자 | arraybox |
+| 이름 | 이일주 |
+| 이메일 | arraybox@chungbuk.ac.kr |
+| 학번 | 2025254015 |
 
-- **Harris Corner Detector**: 코너를 검출하고 빨간색으로 표시, 정규화된 코너 맵과 좌우로 비교 출력
-- **FAST Corner Detector**: threshold 30으로 코너를 검출하여 초록색 원으로 표시
-- **FAST (NonmaxSuppression OFF)**: 비최대 억제를 끄고 더 많은 코너점을 검출
 
-### example2.py
-
-- **drawKeypoints**: FAST로 검출한 키포인트를 보라색으로 표시
-- **drawKeypoints (RICH)**: 키포인트의 크기와 방향을 포함하여 초록색으로 표시
-- **drawMatches**: 자기 자신과의 매칭 결과를 Rich 모드로 시각화
-
-### chapter7.py
-
-이미지(1) `Lena.png`와 이미지(2) `Lena_rotate.png`에서 4가지 특징을 검출하고 비교:
-
-| 특징 검출기 | 표시 모양 | 색상 |
-|---|---|---|
-| FAST | 원 (circle) | 초록색 |
-| Harris Corner | 사각형 (rectangle) | 빨간색 |
-| GoodFeaturesToTrack | 삼각형 (triangle) | 노란색 |
-| SIFT | 다이아몬드 (diamond) | 분홍색 |
-
-두 영상을 좌우로 합쳐 한 창에 출력하며, 각 이미지 좌측 하단에 반투명 범례를 표시합니다.
-
-## 필요 라이브러리
-
-```bash
-pip install opencv-python numpy
-```
