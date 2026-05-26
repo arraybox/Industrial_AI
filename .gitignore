@@ -44,6 +44,8 @@ dist_coefs.npy
 fisheye_camera_mat.npy
 fisheye_dist_coefs.npy
 stereo.npy
+!PJT_21-110/case1/stereo.npy
+stereo_rectification_result.png
 PJT_21-109/pinhole_calib/
 
 # Archive files
