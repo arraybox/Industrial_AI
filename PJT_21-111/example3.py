@@ -1,0 +1,43 @@
+import cv2
+import cv2.aruco as aruco
+import numpy as np
+
+
+def draw_marker(aruco_dict, marker_id, side_pixels):
+    if hasattr(aruco, "drawMarker"):
+        return aruco.drawMarker(aruco_dict, marker_id, side_pixels)
+    return aruco.generateImageMarker(aruco_dict, marker_id, side_pixels)
+
+
+def detect_markers(image, aruco_dict):
+    if hasattr(aruco, "ArucoDetector"):
+        detector = aruco.ArucoDetector(aruco_dict, aruco.DetectorParameters())
+        return detector.detectMarkers(image)
+    return aruco.detectMarkers(image, aruco_dict)
+
+
+aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
+
+img = np.full((700, 700), 255, np.uint8)
+
+img[100:300, 100:300] = draw_marker(aruco_dict, 2, 200)
+img[100:300, 400:600] = draw_marker(aruco_dict, 76, 200)
+img[400:600, 100:300] = draw_marker(aruco_dict, 42, 200)
+img[400:600, 400:600] = draw_marker(aruco_dict, 123, 200)
+
+img = cv2.GaussianBlur(img, (11, 11), 0)
+
+cv2.imshow("Created ArUco markers", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
+
+corners, ids, _ = detect_markers(img, aruco_dict)
+
+img_color = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+aruco.drawDetectedMarkers(img_color, corners, ids)
+
+cv2.imshow("Detected ArUco markers", img_color)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

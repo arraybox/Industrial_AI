@@ -48,6 +48,7 @@
 | `PJT_21-108` | Affine/Perspective Transform 이미지 워핑, Lucas-Kanade 특징점 추적, 파노라마 생성 |
 | `PJT_21-109` | 체스보드 패턴 기반 pinhole/fisheye/stereo camera calibration |
 | `PJT_21-110` | 3D triangulation과 stereo rectification |
+| `PJT_21-111` | HOG 사람 검출, Haar/LBP cascade 얼굴 검출, ArUco marker 검출 |
 | `image_labeling_tool` | 웹 기반 이미지 알파벳 라벨링 도구 |
 | `CBLand` | 충청북도 토지 이용, 인구, 인프라 상관분석 프로젝트 |
 
@@ -60,6 +61,7 @@
 | `PJT_21-108` | `example3.py`, `0.jpg`, `1.jpg` | OpenCV Stitcher와 특징점 매칭 fallback 기반 panorama stitching 실습 |
 | `PJT_21-109` | `example1.py`, `example2.py`, `example3.py`, `example4.py` | 체스보드 코너 검출, pinhole/fisheye/stereo 캘리브레이션, 왜곡/보정 좌표 변환 실습 |
 | `PJT_21-110` | `example1.py`, `example2.py`, `example3.py`, `example4.py` | 3D 점 복원, stereo rectification, Fundamental/Essential matrix 계산과 Essential matrix 분해 실습 |
+| `PJT_21-111` | `example1.py`, `example2.py`, `example3.py`, `people.jpg` | OpenCV HOG 사람 검출, Haar/LBP cascade 얼굴 검출, ArUco marker 검출 실습 |
 
 ## 실행 환경
 

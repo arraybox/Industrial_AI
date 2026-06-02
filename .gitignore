@@ -36,6 +36,7 @@ ENV/
 # Local data/runtime outputs
 logs/
 *.log
+*.mp4
 tmp/
 temp/
 panorama_result.jpg
